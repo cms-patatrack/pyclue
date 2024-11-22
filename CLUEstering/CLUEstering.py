@@ -850,17 +850,19 @@ class clusterer:
 
         return centroids
 
-    def input_plotter(self, plot_title: str = '', title_size: float = 16,
-                      x_label: str = 'x', y_label: str = 'y', z_label: str = 'z',
-                      label_size: float = 16, pt_size: float = 1, pt_colour: str = 'b',
-                      grid: bool = True, grid_style: str = '--', grid_size: float = 0.2,
-                      x_ticks=None, y_ticks=None, z_ticks=None,
+    def input_plotter(self, filepath: Union[str, None] = None, plot_title: str = '',
+                      title_size: float = 16, x_label: str = 'x', y_label: str = 'y',
+                      z_label: str = 'z', label_size: float = 16, pt_size: float = 1,
+                      pt_colour: str = 'b', grid: bool = True, grid_style: str = '--',
+                      grid_size: float = 0.2, x_ticks=None, y_ticks=None, z_ticks=None,
                       **kwargs) -> None:
         """
         Plots the points in input.
 
         Parameters
         ----------
+        filepath : string, optional
+            The path to the file where the plot should be saved.
         plot_title : string, optional
             Title of the plot.
         title_size : float, optional
@@ -930,7 +932,10 @@ class clusterer:
             if y_ticks is not None:
                 plt.yticks(y_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
         elif self.clust_data.n_dim == 2:
             plt.scatter(cartesian_coords[0],
                         cartesian_coords[1],
@@ -954,7 +959,10 @@ class clusterer:
             if y_ticks is not None:
                 plt.yticks(y_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
         else:
             fig = plt.figure()
             ax_ = fig.add_subplot(projection='3d')
@@ -984,14 +992,17 @@ class clusterer:
             if z_ticks is not None:
                 ax_.set_zticks(z_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
 
-    def cluster_plotter(self, plot_title: str = '', title_size: float = 16,
-                        x_label: str = 'x', y_label: str = 'y', z_label: str = 'z',
-                        label_size: float = 16, outl_size: float = 10, pt_size: float = 10,
-                        seed_size: float = 25, grid: bool = True, grid_style: str = '--',
-                        grid_size: float = 0.2, x_ticks=None, y_ticks=None, z_ticks=None,
-                        **kwargs) -> None:
+    def cluster_plotter(self, filepath: Union[str, None] = None, plot_title: str = '',
+                        title_size: float = 16, x_label: str = 'x', y_label: str = 'y',
+                        z_label: str = 'z', label_size: float = 16, outl_size: float = 10,
+                        pt_size: float = 10, seed_size: float = 25, grid: bool = True,
+                        grid_style: str = '--', grid_size: float = 0.2, x_ticks=None,
+                        y_ticks=None, z_ticks=None, **kwargs) -> None:
         """
         Plots the clusters with a different colour for every cluster.
 
@@ -1000,30 +1011,32 @@ class clusterer:
 
         Parameters
         ----------
+        filepath : string, optional
+            The path to the file where the plot should be saved.
         plot_title : string, optional
-            Title of the plot
+            Title of the plot.
         title_size : float, optional
-            Size of the plot title
+            Size of the plot title.
         x_label : string, optional
-            Label on x-axis
+            Label on x-axis.
         y_label : string, optional
-            Label on y-axis
+            Label on y-axis.
         z_label : string, optional
-            Label on z-axis
+            Label on z-axis.
         label_size : int, optional
-            Fontsize of the axis labels
+            Fontsize of the axis labels.
         outl_size : int, optional
-            Size of the outliers in the plot
+            Size of the outliers in the plot.
         pt_size : int, optional
-            Size of the points in the plot
+            Size of the points in the plot.
         seed_size : int, optional
-            Size of the seeds in the plot
+            Size of the seeds in the plot.
         grid : bool, optional
-            f true displays grids in the plot
+            f true displays grids in the plot.
         grid_style : string, optional
-            Style of the grid
+            Style of the grid.
         grid_size : float, optional
-            Linewidth of the plot grid
+            Linewidth of the plot grid.
         x_ticks : list, optional
             List of ticks for the x axis.
         y_ticks : list, optional
@@ -1082,7 +1095,10 @@ class clusterer:
             if y_ticks is not None:
                 plt.yticks(y_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
         elif self.clust_data.n_dim == 2:
             data = {'x0': cartesian_coords[0],
                     'x1': cartesian_coords[1],
@@ -1117,7 +1133,10 @@ class clusterer:
             if y_ticks is not None:
                 plt.yticks(y_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
         else:
             data = {'x0': cartesian_coords[0],
                     'x1': cartesian_coords[1],
@@ -1159,7 +1178,10 @@ class clusterer:
             if z_ticks is not None:
                 ax_.set_zticks(z_ticks)
 
-            plt.show()
+            if filepath is not None:
+                plt.savefig(filepath)
+            else:
+                plt.show()
 
     def to_csv(self, output_folder: str, file_name: str) -> None:
         """
