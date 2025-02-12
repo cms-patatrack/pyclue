@@ -47,4 +47,14 @@ namespace clue {
 #endif
 #endif  // ALPAKA_ACC_GPU_HIP_ENABLED
 
+#if defined ALPAKA_SYCL_ONEAPI_CPU
+  template <>
+  constexpr inline AllocatorPolicy allocator_policy<alpaka::DevCpuSycl> = AllocatorPolicy::Synchronous;
+#endif
+
+#if defined ALPAKA_SYCL_ONEAPI_GPU
+  template <>
+  constexpr inline AllocatorPolicy allocator_policy<alpaka::DevGpuSyclIntel> = AllocatorPolicy::Asynchronous;
+#endif
+
 }  // namespace clue
