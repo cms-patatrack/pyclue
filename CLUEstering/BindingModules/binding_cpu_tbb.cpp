@@ -29,6 +29,7 @@ namespace alpaka_tbb_async {
 
   template <typename Kernel>
   void mainRun(float dc,
+               float seed_dc,
                float rhoc,
                float dm,
                int pPBin,
@@ -53,6 +54,7 @@ namespace alpaka_tbb_async {
     switch (Ndim) {
       [[unlikely]] case (1):
         run<1, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -64,6 +66,7 @@ namespace alpaka_tbb_async {
         return;
       [[likely]] case (2):
         run<2, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -75,6 +78,7 @@ namespace alpaka_tbb_async {
         return;
       [[likely]] case (3):
         run<3, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -86,6 +90,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (4):
         run<4, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -97,6 +102,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (5):
         run<5, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -108,6 +114,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (6):
         run<6, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -119,6 +126,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (7):
         run<7, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -130,6 +138,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (8):
         run<8, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -141,6 +150,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (9):
         run<9, Kernel>(dc,
+                       seed_dc,
                        rhoc,
                        dm,
                        pPBin,
@@ -152,6 +162,7 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (10):
         run<10, Kernel>(dc,
+                        seed_dc,
                         rhoc,
                         dm,
                         pPBin,
@@ -174,6 +185,7 @@ namespace alpaka_tbb_async {
           pybind11::overload_cast<float,
                                   float,
                                   float,
+                                  float,
                                   int,
                                   py::array_t<float>,
                                   py::array_t<int>,
@@ -187,6 +199,7 @@ namespace alpaka_tbb_async {
           pybind11::overload_cast<float,
                                   float,
                                   float,
+                                  float,
                                   int,
                                   py::array_t<float>,
                                   py::array_t<int>,
@@ -198,6 +211,7 @@ namespace alpaka_tbb_async {
           "mainRun");
     m.def("mainRun",
           pybind11::overload_cast<float,
+                                  float,
                                   float,
                                   float,
                                   int,
