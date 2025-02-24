@@ -238,15 +238,15 @@ class clusterer:
         Execution time of the algorithm, expressed in nanoseconds.
     """
 
-    def __init__(self, dc_: float, rhoc_: float, dm_: [float, None] = None, seed_dc: [float, None] = None, ppbin: int = 128):
-        self.dc = dc_
-        self.rhoc = rhoc_
-        self.dm = dm_
+    def __init__(self, dc: float, rhoc: float, dm: [float, None] = None, seed_dc: [float, None] = None, ppbin: int = 128):
+        self.dc = dc
+        self.rhoc = rhoc
+        self.dm = dm
         if dm is None:
-            self.dm = dc_
+            self.dm = dc
         self.seed_dc = seed_dc
         if seed_dc is None:
-            self.seed_dc = dc_
+            self.seed_dc = dc
         self.ppbin = ppbin
 
         # Initialize attributes
