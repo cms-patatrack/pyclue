@@ -682,13 +682,13 @@ class clusterer:
 
         start = time.time_ns()
         if backend == "cpu serial":
-            cluster_id_is_seed = cpu_serial.mainRun(self.dc, self.seed_dc, self.rhoc, self.dm,
+            cluster_id_is_seed = cpu_serial.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
                                                     self.ppbin, data.coords, data.results,
                                                     self.kernel, data.n_dim,
                                                     data.n_points, block_size, device_id)
         elif backend == "cpu tbb":
             if tbb_found:
-                cluster_id_is_seed = cpu_tbb.mainRun(self.dc, self.seed_dc, self.rhoc, self.dm,
+                cluster_id_is_seed = cpu_tbb.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
                                                      self.ppbin, data.coords, data.results,
                                                      self.kernel, data.n_dim,
                                                      data.n_points, block_size, device_id)
@@ -697,7 +697,7 @@ class clusterer:
 
         elif backend == "gpu cuda":
             if cuda_found:
-                cluster_id_is_seed = gpu_cuda.mainRun(self.dc, self.seed_dc, self.rhoc, self.dm,
+                cluster_id_is_seed = gpu_cuda.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
                                                       self.ppbin, data.coords, data.results,
                                                       self.kernel, data.n_dim,
                                                       data.n_points, block_size, device_id)
@@ -706,7 +706,7 @@ class clusterer:
 
         elif backend == "gpu hip":
             if hip_found:
-                cluster_id_is_seed = gpu_hip.mainRun(self.dc, self.seed_dc, self.rhoc, self.dm,
+                cluster_id_is_seed = gpu_hip.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
                                                      self.ppbin, data.coords, data.results,
                                                      self.kernel, data.n_dim,
                                                      data.n_points, block_size, device_id)

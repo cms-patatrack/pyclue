@@ -29,9 +29,9 @@ namespace alpaka_tbb_async {
 
   template <typename Kernel>
   void mainRun(float dc,
-               float seed_dc,
                float rhoc,
                float dm,
+               float seed_dc,
                int pPBin,
                py::array_t<float> data,
                py::array_t<int> results,
@@ -54,9 +54,9 @@ namespace alpaka_tbb_async {
     switch (Ndim) {
       [[unlikely]] case (1):
         run<1, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<1>{n_points},
@@ -66,9 +66,9 @@ namespace alpaka_tbb_async {
         return;
       [[likely]] case (2):
         run<2, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<2>{n_points},
@@ -78,9 +78,9 @@ namespace alpaka_tbb_async {
         return;
       [[likely]] case (3):
         run<3, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<3>{n_points},
@@ -90,9 +90,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (4):
         run<4, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<4>{n_points},
@@ -102,9 +102,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (5):
         run<5, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<5>{n_points},
@@ -114,9 +114,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (6):
         run<6, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<6>{n_points},
@@ -126,9 +126,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (7):
         run<7, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<7>{n_points},
@@ -138,9 +138,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (8):
         run<8, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<8>{n_points},
@@ -150,9 +150,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (9):
         run<9, Kernel>(dc,
-                       seed_dc,
                        rhoc,
                        dm,
+                       seed_dc,
                        pPBin,
                        std::make_tuple(pData, pResults),
                        PointInfo<9>{n_points},
@@ -162,9 +162,9 @@ namespace alpaka_tbb_async {
         return;
       [[unlikely]] case (10):
         run<10, Kernel>(dc,
-                        seed_dc,
                         rhoc,
                         dm,
+                        seed_dc,
                         pPBin,
                         std::make_tuple(pData, pResults),
                         PointInfo<10>{n_points},
