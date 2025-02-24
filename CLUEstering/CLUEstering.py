@@ -239,7 +239,7 @@ class clusterer:
     """
 
     def __init__(self, dc_: float, rhoc_: float, dm_: [float, None] = None, seed_dc: [float, None] = None, ppbin: int = 128):
-        self.dc = dc
+        self.dc = dc_
         self.rhoc = rhoc_
         self.dm = dm_
         if dm is None:
