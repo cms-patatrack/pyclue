@@ -209,7 +209,7 @@ class clusterer:
 
     Attributes
     ----------
-    dc_ : float
+    dc : float
         Spatial parameter indicating how large is the region over which the local density of
         each point is calculated.
     rhoc : float
@@ -222,7 +222,7 @@ class clusterer:
         Similar to dc, it's a spatial parameter that determines the region over
         which the followers of a point are searched.
 
-        While dc_ determines the size of the search box in which the neighbors
+        While dc determines the size of the search box in which the neighbors
         of a point are searched when calculating its local density, when
         looking for followers while trying to find potential seeds the size of
         the search box is given by dm.
@@ -238,12 +238,15 @@ class clusterer:
         Execution time of the algorithm, expressed in nanoseconds.
     """
 
-    def __init__(self, dc_: float, rhoc_: float, dm_: [float, None] = None, ppbin: int = 10):
-        self.dc_ = dc_
-        self.rhoc = rhoc_
-        self.dm = dm_
-        if dm_ is None:
-            self.dm = dc_
+    def __init__(self, dc: float, rhoc: float, dm: [float, None] = None, seed_dc: [float, None] = None, ppbin: int = 128):
+        self.dc = dc
+        self.rhoc = rhoc
+        self.dm = dm
+        if dm is None:
+            self.dm = dc
+        self.seed_dc = seed_dc
+        if seed_dc is None:
+            self.seed_dc = dc
         self.ppbin = ppbin
 
         # Initialize attributes
@@ -258,13 +261,17 @@ class clusterer:
         self.elapsed_time = 0.
 
     def set_params(self, dc: float, rhoc: float,
-                   dm: [float, None], ppbin: int = 128) -> None:
-        self.dc_ = dc
+                   dm: [float, None] = None, seed_dc: [float, None] = None, ppbin: int = 128) -> None:
+        self.dc = dc
         self.rhoc = rhoc
         if dm is not None:
             self.dm = dm
         else:
             self.dm = dc
+        if seed_dc is not None:
+            self.seed_dc = seed_dc
+        else:
+            self.seed_dc = dc
         self.ppbin = ppbin
 
     def _read_array(self, input_data: Union[list, np.ndarray]) -> None:
@@ -675,14 +682,14 @@ class clusterer:
 
         start = time.time_ns()
         if backend == "cpu serial":
-            cluster_id_is_seed = cpu_serial.mainRun(self.dc_, self.rhoc, self.dm, self.ppbin,
-                                                    data.coords, data.results,
+            cluster_id_is_seed = cpu_serial.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
+                                                    self.ppbin, data.coords, data.results,
                                                     self.kernel, data.n_dim,
                                                     data.n_points, block_size, device_id)
         elif backend == "cpu tbb":
             if tbb_found:
-                cluster_id_is_seed = cpu_tbb.mainRun(self.dc_, self.rhoc, self.dm, self.ppbin,
-                                                     data.coords, data.results,
+                cluster_id_is_seed = cpu_tbb.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
+                                                     self.ppbin, data.coords, data.results,
                                                      self.kernel, data.n_dim,
                                                      data.n_points, block_size, device_id)
             else:
@@ -690,8 +697,8 @@ class clusterer:
 
         elif backend == "gpu cuda":
             if cuda_found:
-                cluster_id_is_seed = gpu_cuda.mainRun(self.dc_, self.rhoc, self.dm, self.ppbin,
-                                                      data.coords, data.results,
+                cluster_id_is_seed = gpu_cuda.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
+                                                      self.ppbin, data.coords, data.results,
                                                       self.kernel, data.n_dim,
                                                       data.n_points, block_size, device_id)
             else:
@@ -699,8 +706,8 @@ class clusterer:
 
         elif backend == "gpu hip":
             if hip_found:
-                cluster_id_is_seed = gpu_hip.mainRun(self.dc_, self.rhoc, self.dm, self.ppbin,
-                                                     data.coords, data.results,
+                cluster_id_is_seed = gpu_hip.mainRun(self.dc, self.rhoc, self.dm, self.seed_dc,
+                                                     self.ppbin, data.coords, data.results,
                                                      self.kernel, data.n_dim,
                                                      data.n_points, block_size, device_id)
             else:
