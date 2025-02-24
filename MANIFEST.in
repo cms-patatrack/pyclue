@@ -1,4 +1,5 @@
-graft CLUEstering/alpaka/
+graft CLUEstering
+graft include
 graft extern/
 include CMakeLists.txt
 
