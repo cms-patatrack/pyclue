@@ -49,7 +49,7 @@ namespace alpaka_serial_sync {
     // Create the queue
     Queue queue_(dev_acc);
 
-    // Running the clustering algorithm //
+    // Running the clustering algorithm
     switch (Ndim) {
       [[unlikely]] case (1):
         run<1, Kernel>(dc,

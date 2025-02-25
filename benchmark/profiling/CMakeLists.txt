@@ -68,3 +68,5 @@ if(CMAKE_CUDA_COMPILER)
   set_target_properties(cuda.out PROPERTIES CUDA_SEPARABLE_COMPILATION ON
                                             CUDA_ARCHITECTURES "50;60;61;62;70")
 endif()
+
+add_subdirectory(sycl)
