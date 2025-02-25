@@ -26,8 +26,9 @@ message(STATUS "oneDPL_DIR: ${oneDPL_DIR}")
 # add_subdirectory(pybind11)
 
 add_executable(sycl_cpu.out ../main.cpp)
-target_include_directories(sycl_cpu.out PRIVATE ${alpaka_SOURCE_DIR}/include
-                                                 ${Boost_INCLUDE_DIR})
+target_include_directories(sycl_cpu.out PRIVATE ${CMAKE_SOURCE_DIR}/../../include
+												${alpaka_SOURCE_DIR}/include
+                                                ${Boost_INCLUDE_DIR})
 target_link_libraries(sycl_cpu.out PRIVATE pybind11::embed)
 target_include_directories(sycl_cpu.out PRIVATE ${oneDPL_DIR})
 target_compile_options(sycl_cpu.out PRIVATE -DALPAKA_ACC_SYCL_ENABLED
