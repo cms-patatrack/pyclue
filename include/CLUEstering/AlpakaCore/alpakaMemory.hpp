@@ -110,7 +110,7 @@ namespace clue {
     if constexpr (allocator_policy<alpaka::Dev<TQueue>> == AllocatorPolicy::Caching) {
       return allocCachedBuf<T, Idx>(host, queue, Scalar{});
     } else {
-      using Platform = alpaka::Platform<alpaka::Dev<TQueue>>;
+	  using Platform = alpaka::Platform<alpaka::Dev<TQueue>>;
       return alpaka::allocMappedBuf<T, Idx>(host, platform<Platform>(), Scalar{});
     }
   }
@@ -138,7 +138,7 @@ namespace clue {
       return allocCachedBuf<std::remove_extent_t<T>, Idx>(
           host, queue, Vec1D{std::extent_v<T>});
     } else {
-      using Platform = alpaka::Platform<alpaka::Dev<TQueue>>;
+	  using Platform = alpaka::Platform<alpaka::Dev<TQueue>>;
       return alpaka::allocMappedBuf<std::remove_extent_t<T>, Idx>(
           host, platform<Platform>(), Vec1D{std::extent_v<T>});
     }

@@ -91,7 +91,7 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE_CLUE {
     const auto dev_acc = alpaka::getDevByIdx(alpaka::Platform<Acc1D>{}, 0u);
     Queue queue_(dev_acc);
 
-    PointsSoA<2> h_points(coords.data(), results.data(), PointInfo<2>{n_points});
+    PointsSoA<2> h_points(coords.data(), results.data(), PointInfo<2>{(uint32_t)n_points});
     PointsAlpaka<2> d_points(queue_, n_points);
 
     const float dc{1.5f}, rhoc{10.f}, outlier{1.5f};
